@@ -2,16 +2,8 @@
 
 
 
-这个[溜溜梅](https://en.wikipedia.org/wiki/Large_language_model)生成的克苏鲁产物可以100%识别 `ptlogin.4399.com` 的验证码。onnx模型是用matcher识别完之后训练出来的。
-
-
-
-## 起因
-
-
-本来是想要训一个onnx但是人工输验证码太麻烦还容易错，在0个[普朗克时间](https://zh.wikipedia.org/wiki/%E6%99%AE%E6%9C%97%E5%85%8B%E6%99%82%E9%96%93)后发现4399的验证码字母样子居然完全不会变。这个现象使我[蒙古](https://zh.wikipedia.org/wiki/%E8%92%99%E5%8F%A4%E5%9B%BD)。
-
-于是我向[溜溜梅](https://en.wikipedia.org/wiki/Large_language_model)许愿给我生成一个正确率100%的产物。再让那个去顺带训了一下onnx。下面是跟这个项目([OxygenNEL-OpenNELOCR](https://github.com/MC20018/OxygenNEL-OpenNELOCR))的对比。
+这个[溜溜梅](https://en.wikipedia.org/wiki/Large_language_model)生成的克苏鲁产物可以100%识别 `ptlogin.4399.com` 的四位验证码。onnx模型是用matcher识别完验证码后训练出的产物。
+我向[溜溜梅](https://en.wikipedia.org/wiki/Large_language_model)许愿给我生成一个正确率100%的产物。下面是跟这个项目([OxygenNEL-OpenNELOCR](https://github.com/MC20018/OxygenNEL-OpenNELOCR))的对比。
 
 
 <img src="Comparison.png" width="657" />
@@ -108,9 +100,6 @@ print(label)
 依赖：`pip install onnxruntime numpy pillow`。
 
 
-## 编译
-
-自己去编译去。
 
 
 
@@ -123,7 +112,7 @@ print(label)
 
 ## 许可证
 
-见 [LICENSE](LICENSE)：**MIT**。嗯对需要标注作者名，虽然我只手写了README.md。但是如果你拿着这个东西忽悠人去圈钱。那我只能祝你自拍下就是全家福了。
+见 [LICENSE](LICENSE)：**MIT**。
 
 `stb_image.h` 是公有领域 / MIT（[nothings/stb](https://github.com/nothings/stb)），
 只用于构建，不改变本项目的许可证。
