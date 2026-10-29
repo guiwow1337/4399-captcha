@@ -1,9 +1,10 @@
-# 4399_CAPTCHA
+# 4399-captcha
 
 
 
-这个[溜溜梅](https://en.wikipedia.org/wiki/Large_language_model)生成的克苏鲁产物可以100%识别 `ptlogin.4399.com` 的四位验证码。onnx模型是用matcher识别完验证码后训练出的产物。
-我向[溜溜梅](https://en.wikipedia.org/wiki/Large_language_model)许愿给我生成一个正确率100%的产物。下面是跟这个项目([OxygenNEL-OpenNELOCR](https://github.com/MC20018/OxygenNEL-OpenNELOCR))的对比。
+100%识别 `ptlogin.4399.com` 的四位验证码。onnx模型是用matcher识别完验证码后训练出的产物。
+
+下面是跟这个项目([OxygenNEL-OpenNELOCR](https://github.com/MC20018/OxygenNEL-OpenNELOCR))的对比。
 
 
 <img src="Comparison.png" width="657" />
@@ -48,16 +49,16 @@ CFD6
 输出   p0..p3   各 (batch, 25)      float32
 ```
 
-架构和权重全都烘在 `model.onnx` 里了，**不需要任何配套配置就能加载**。
-但有两个常量在外边，不写出来推不出来：**字符集顺序**和**预处理**。
+**不需要任何配套配置就能加载**。
+有两个常量在外边，不写无法正常运行：**字符集顺序**和**预处理**。
 前者在 `model/model.json` 里，后者就是下面这几行。
 
 `model/model.json` 的字段：
 
 | 字段 | 值 | 说明 |
 |---|---|---|
-| `charset` | `23467ACDEFGHJKMNPQRTUVWXY` | 25 个字符，索引 = 输出那一维的下标 |
-| `seq_len` | `4` | 4 位验证码，对应 4 个输出头 |
+| `charset` | `23467ACDEFGHJKMNPQRTUVWXY` | 25 个字符索引 |
+| `seq_len` | `4` | 4 位验证码 |
 | `num_classes` | `25` | 每个输出头的宽度 |
 | `img_h` / `img_w` | `30` / `60` | 输入尺寸 |
 | `widths` | `[16, 32, 64, 96]` | 分段池化的 4 段宽度（4 个槽位各管一段） |
@@ -74,7 +75,7 @@ a = (a - 0.5) / 0.5                      # 等价于 /127.5 - 1
 x = a.transpose(2, 0, 1)[None]           # (1, 3, 30, 60)
 ```
 
-1. **保持 RGB，不要转灰度** —— 每个字符颜色不同，叠字时颜色是最强的分离线索
+1. **保持 RGB，不要转灰度** —— 每个字符颜色不同
 2. **不要缩放**，原图就是 60×30；喂别的尺寸会直接掉到 ~0%
 3. 输出是 4 个**各自独立**的 25 类 logits，不是 CTC：
    **每位各自 argmax 再查 charset**，不需要合并重复、也不用去 blank
