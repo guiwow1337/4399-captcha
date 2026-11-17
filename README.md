@@ -1,17 +1,14 @@
-# 4399-captcha
+# 4399-captcha / 4399验证码识别 / 4399 Captcha OCR Solver
 
 
 
-100%识别 `ptlogin.4399.com` 的四位验证码。onnx模型是用matcher识别完验证码后训练出的产物。
 
-下面是跟这个项目([OxygenNEL-OpenNELOCR](https://github.com/MC20018/OxygenNEL-OpenNELOCR))的对比。
+100%识别正确率的4399四位验证码识别工具 。
+
+支持模板匹配 + ONNX神经网络模型。
 
 
-<img src="Comparison.png" width="657" />
 
-## 警告
-
-若4399对此类验证码进行了大幅更新 则此方法可能失效
 
 
 ## 用法
@@ -23,11 +20,11 @@
 CFD6
 ```
 
-一次一张，单线程，只支持 JPEG(4399使用此格式)。仓库中仅给出实现逻辑，使用时请自己修改。
+只支持 JPEG(4399使用此格式)。仓库中仅给出实现逻辑，使用时请自己修改。
 
 ### model.onnx
 
-见下面「ONNX 模型：配置与用法」，那段里有一份复制就能跑的完整代码。
+见「ONNX 模型：配置与用法」。
 
 ## 文件
 
@@ -75,12 +72,12 @@ a = (a - 0.5) / 0.5                      # 等价于 /127.5 - 1
 x = a.transpose(2, 0, 1)[None]           # (1, 3, 30, 60)
 ```
 
-1. **保持 RGB，不要转灰度** —— 每个字符颜色不同
+1. **保持 RGB，不要转灰度**
 2. **不要缩放**，原图就是 60×30；喂别的尺寸会直接掉到 ~0%
 3. 输出是 4 个**各自独立**的 25 类 logits，不是 CTC：
    **每位各自 argmax 再查 charset**，不需要合并重复、也不用去 blank
 
-### 完整可跑的代码
+### 实现
 
 ```python
 import json
@@ -105,12 +102,15 @@ print(label)
 依赖：`pip install onnxruntime numpy pillow`。
 
 
+### 对比
+
+与([OxygenNEL-OpenNELOCR](https://github.com/MC20018/OxygenNEL-OpenNELOCR))进行对比。
+
+
+<img src="Comparison.png" width="657" />
 
 
 
-## 声明
-
-作者不为这个克苏鲁产物负任何责任。如果它帮到了你。你可以顺便点一个star。
 
 
 
