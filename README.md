@@ -1,14 +1,19 @@
-# 4399-captcha / 4399验证码识别 / 4399 Captcha OCR Solver
+# 4399-captcha / 4399验证码识别 / 4399 Captcha Solver
 
 
 
 
-100%识别正确率的4399四位验证码识别工具 。
+100%识别4399四位验证码 `ptlogin.4399.com` 的识别工具 。
 
 支持模板匹配 + ONNX神经网络模型。
 
 
+### 对比
 
+与([OxygenNEL-OpenNELOCR](https://github.com/MC20018/OxygenNEL-OpenNELOCR))进行对比。
+
+
+<img src="Comparison.png" width="657" />
 
 
 ## 用法
@@ -102,17 +107,12 @@ print(label)
 依赖：`pip install onnxruntime numpy pillow`。
 
 
-### 对比
-
-与([OxygenNEL-OpenNELOCR](https://github.com/MC20018/OxygenNEL-OpenNELOCR))进行对比。
 
 
-<img src="Comparison.png" width="657" />
+## 致谢
 
-
-
-
-
+- **人工智能！。，？！**：DeepSeek-V4.1-Flash 0731
+- **绕过思路**：_zrs
 
 
 ## 许可证
